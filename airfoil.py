@@ -30,20 +30,22 @@ class Airfoil:
         self.y = df[:,1]
 
     def saveImg(self):
-        img_file = '{}_img.png'.format(self.name)
-        plt.savefig(img_file)
-        return img_file
-
-    def pixel_grid(self):
         # Given airfoil x and y coordinates and airfoil name, 
         # save a plot of the shaded airfoil, and return a
         # greyscale image matrix
-        
         # Create plot of filled airfoil
+        IMG_SIZE = 64
+        my_dpi = 10
+        plt.figure(figsize=(IMG_SIZE/my_dpi, IMG_SIZE/my_dpi), dpi=my_dpi)
         plt.fill(self.x,self.y,'k')
         plt.axis('equal')
         plt.axis('off')
-        # plt.show()
+        #plt.show()
+        img_file = '{}_img.png'.format(self.name)
+        plt.savefig(img_file,dpi=my_dpi)
+        return img_file
+
+    def pixel_grid(self):
         img_file = self.saveImg()
 
         # Read in pixel values in greyscale
