@@ -9,6 +9,7 @@ numNodes   = '170'
 saveFlnmAF = 'Save_Airfoil.txt'
 saveFlnmCp = 'Save_Cp.txt'
 xfoilFlnm  = 'xfoil_input.txt'
+curDir     = os.getcwd()
 # Delete files if they exist
 if os.path.exists(saveFlnmAF):
     os.remove(saveFlnmAF)
@@ -27,16 +28,13 @@ fid.write("ALFA " + AoA + "\n")
 fid.write("CPWR " + saveFlnmCp + "\n")
 fid.close()
 # Run the XFoil calling command
-os.system("\datasets\xfoil.exe < xfoil_input.txt")
+os.system("{}\\datasets\\xfoil.exe < {}".format(curDir,xfoilFlnm))
 # Delete file after running
 if os.path.exists(xfoilFlnm):
     os.remove(xfoilFlnm)
 # %% READ DATA FILE: AIRFOIL
-flpth = "C:/Users/Josh/Documents/Python/Panel_Methods/"
-flnm  = flpth + saveFlnmAF
-    
 # Load the data from the text file
-dataBuffer = np.loadtxt(flnm, skiprows=0)
+dataBuffer = np.loadtxt(saveFlnmAF, skiprows=0)
 # Extract data from the loaded dataBuffer array
 XB = dataBuffer[:,0]
 YB = dataBuffer[:,1]
