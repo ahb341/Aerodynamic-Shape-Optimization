@@ -5,9 +5,19 @@ import shutil
 import sys
 import string
 import time
+from pathlib import Path
 
-xfoilpath = r'D:\know\Technika\AERODYNAMIKA_A_LETADLA\xfoil6.96\bin\xfoil.exe'
+xfoilpath = Path("datasets/xfoil.exe")
+print(xfoilpath.name)
+print(xfoilpath.suffix)
+print(xfoilpath.stem)
 
+if not xfoilpath.exists():
+    print("Oops, file doesn't exist!")
+else:
+    print("Yay, the file exists!")
+print(str(xfoilpath))
+sp.Popen(str(xfoilpath))
 
 def Xfoil(name, Ncrit, Re ):
     def Cmd(cmd):
@@ -18,9 +28,9 @@ def Xfoil(name, Ncrit, Re ):
         pass
     #    print ("no such file")
     # run xfoil
-    ps = sp.Popen(xfoilpath ,stdin=sp.PIPE,stderr=sp.PIPE,stdout=sp.PIPE)
+    ps = sp.Popen(str(xfoilpath) ,stdin=sp.PIPE,stderr=sp.PIPE,stdout=sp.PIPE)
     ps.stderr.close()
-    # comand part
+    # command part
     Cmd('load '+name+'.dat')
     Cmd('OPER')
     Cmd('Vpar')
@@ -54,3 +64,5 @@ def getLDmax(name):
         if(LD>LDmax):
             LDmax = LD
     return LDmax
+
+#Xfoil('mh32',9,500000)
