@@ -17,7 +17,8 @@ if not xfoilpath.exists():
 else:
     print("Yay, the file exists!")
 print(str(xfoilpath))
-sp.Popen(str(xfoilpath))
+ps = sp.Popen(str(xfoilpath),stdin=sp.PIPE,stderr=sp.PIPE,stdout=sp.PIPE)
+ps._stdin_write
 
 def Xfoil(name, Ncrit, Re ):
     def Cmd(cmd):
