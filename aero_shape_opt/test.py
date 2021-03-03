@@ -1,9 +1,11 @@
-from airfoil import Airfoil
+from cnn_2D.airfoil import Airfoil
+
 
 name = 'mh32'
 M = 0 # Mach number
 Re = 500000 # Reynolds number
 af = Airfoil(name,M,Re)
+
 
 path = 'mh32.dat'
 af.setXCoordsFromPath()
