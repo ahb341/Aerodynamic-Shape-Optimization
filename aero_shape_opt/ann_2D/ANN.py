@@ -12,7 +12,7 @@ def run_ANN(af):
 
    model = tf.keras.Sequential(
    [
-      tf.keras.layers.Input(shape=(28*28,)),
+      tf.keras.layers.Input(shape=(len(input),)),
       tf.keras.layers.Dense(200, activation='relu'),
       tf.keras.layers.Dropout(0.25),
       tf.keras.layers.Dense(100, activation='relu'),

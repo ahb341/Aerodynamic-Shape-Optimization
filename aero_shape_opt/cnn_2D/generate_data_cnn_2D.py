@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+import subprocess
 
 def main():
     alphas        = ['-2','6']
@@ -28,10 +29,10 @@ def runXfoil(name,filename,numNodes,alphas,Re,M):
     inc = '0.25' # increment for angle of attack sequence
 
     # Delete files if they exist
-    if os.path.exists(os.getcwd() + '\\aero_shape_opt\\datasets\\xfoil_data\\' + saveFlnmAF):
-        os.remove(saveFlnmAF)
+    if os.path.exists('aero_shape_opt\\datasets\\xfoil_data\\' + saveFlnmAF):
+        os.remove('aero_shape_opt\\datasets\\xfoil_data\\' + saveFlnmAF)
     if os.path.exists(os.getcwd() + '\\aero_shape_opt\\datasets\\xfoil_data\\' + saveFlnmPolar):
-        os.remove(saveFlnmPolar)
+        os.remove('aero_shape_opt\\datasets\\xfoil_data\\' + saveFlnmPolar)
 
     # Create the airfoil
     fid = open(xfoilFlnm,"w")
@@ -53,7 +54,18 @@ def runXfoil(name,filename,numNodes,alphas,Re,M):
     fid.write("QUIT\n")
     fid.close()
     # Run the XFoil calling command
-    os.system("{}\\aero_shape_opt\\datasets\\xfoil.exe < {}".format(os.getcwd(),xfoilFlnm))
+    # os.system("{}\\aero_shape_opt\\datasets\\xfoil.exe < {}".format(os.getcwd(),xfoilFlnm))
+    f = open(xfoilFlnm,'r')
+    p = subprocess.Popen("{}\\aero_shape_opt\\datasets\\xfoil.exe".format(os.getcwd()),stdin=f)
+    # xfoilFlnm))
+    try:
+        # p.wait(15)
+        p.communicate(timeout=15)
+    except subprocess.TimeoutExpired:
+        p.kill()
+        p.communicate()
+        
+    f.close()
     # Delete file after running
     if os.path.exists(xfoilFlnm):
         os.remove(xfoilFlnm)

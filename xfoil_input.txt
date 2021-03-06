@@ -1,15 +1,15 @@
-load aero_shape_opt/datasets/airfoils/ag11.dat
+load aero_shape_opt/datasets/airfoils/ag19.dat
 PPAR
 N 170
 
 
-PSAV aero_shape_opt/datasets/xfoil_data/ag11_airfoil.txt
+PSAV aero_shape_opt/datasets/xfoil_data/ag19_airfoil.txt
 OPER
 VISC 500000 
 MACH 0 
 ITER 200
 PACC
-aero_shape_opt/datasets/xfoil_data/ag11_polar.txt
+aero_shape_opt/datasets/xfoil_data/ag19_polar.txt
 
 ASEQ -2 6 0.25
 PACC
