@@ -2,7 +2,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-curDir = os.getcwd()
+#curDir = os.getcwd()
 AoA        = '0'
 numNodes   = '170'
 saveFlnmAF = 'Save_Airfoil.txt'
@@ -15,7 +15,7 @@ if os.path.exists(saveFlnmAF):
 if os.path.exists(saveFlnmCp):
     os.remove(saveFlnmCp)
 
-dir = os.getcwd() + '\\datasets\\airfoils'
+dir = os.getcwd() + '\\aero_shape_opt\\datasets\\airfoils'
 for filename in os.listdir(dir):
     if filename.endswith(".dat"):
         print(os.path.join(dir, filename))
