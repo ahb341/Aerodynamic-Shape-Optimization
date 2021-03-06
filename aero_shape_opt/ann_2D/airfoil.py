@@ -39,9 +39,11 @@ class Airfoil:
     def cleanAirfoil(self):
         # Modifies airfoil
         print('Cleaning')
-        tck, fp = interpolate.splprep([self.x, self.y], k=3, s=0.0)
-        print(tck)
-        
+        tck, u = interpolate.splprep([self.x, self.y], k=3, s=0.0)
+        t = np.linspace(0,1,self.N_PTS_AIRFOIL)
+        interp_coords = interpolate.splev(t, tck) # evaluate at points
+        self.interp_x = interp_coords[0]
+        self.interp_y = interp_coords[1]
     
 
     def saveImg(self):

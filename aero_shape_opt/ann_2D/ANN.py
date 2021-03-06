@@ -4,8 +4,12 @@ import numpy as np
 import tensorflow as tf
 print(tf.__version__)
 
-def run():
+def run_ANN(af):
    # ANN Model
+   # Input - a column vector containing the x and y coordinates
+
+   input = np.array([af.interp_x,af.interp_y]).flatten('F')
+
    model = tf.keras.Sequential(
    [
       tf.keras.layers.Input(shape=(28*28,)),
@@ -24,5 +28,3 @@ def run():
 
    # print model layers
    model.summary()            
-
-run()
