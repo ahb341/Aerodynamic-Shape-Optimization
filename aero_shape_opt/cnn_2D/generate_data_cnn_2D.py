@@ -36,6 +36,7 @@ def runXfoil(name,filename,numNodes,alphas,Re,M):
 
     # Create the airfoil
     fid = open(xfoilFlnm,"w")
+    fid.write("PLOP\ng\n\n")
     fid.write("load aero_shape_opt/datasets/airfoils/" + filename + "\n")
     fid.write("PPAR\n")
     fid.write("N " + numNodes + "\n")
@@ -60,7 +61,7 @@ def runXfoil(name,filename,numNodes,alphas,Re,M):
     # xfoilFlnm))
     try:
         # p.wait(15)
-        p.communicate(timeout=15)
+        p.communicate(timeout=30)
     except subprocess.TimeoutExpired:
         p.kill()
         p.communicate()
