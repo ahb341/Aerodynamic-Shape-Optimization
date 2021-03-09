@@ -4,6 +4,7 @@ import os
 import numpy as np
 import re
 import warnings
+import shutil
 from cnn_2D.airfoil import Airfoil
 
 
@@ -45,8 +46,16 @@ for a_name in airfoil_names:
     except:
         print('Could not load data for airfoil '+ a_name)
         continue
-    af = Airfoil(a_name,Ma,Re)
-    px = af.pixel_grid()
+
+
+    # Ensure bad airfoils are dealt with - send them to bad folder
+    try:
+        af = Airfoil(a_name,Ma,Re)
+        px = af.pixel_grid()
+    except:
+        shutil.move('{}\\{}.dat'.format(in_dir,a_name),'aero_shape_opt\\datasets\\bad_airfoils')
+        continue
+
     #coords = coords.flatten() # flatten to a vector of [x1,y1,x2,y2,...]
     # Extract each [AoA, CL, CD, CDp, CM, Top_xtr, Bot_xtr]
     if len(xdata) > 12:
