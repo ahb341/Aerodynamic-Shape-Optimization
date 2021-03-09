@@ -47,7 +47,11 @@ for a_name in airfoil_names:
     Re = header_nums[1]
 
     # Extract each [AoA, CL, CD, CDp, CM, Top_xtr, Bot_xtr]
-    polar_nums = np.array([re.findall(r'[-+]?\d+[\.\,\d]*\d*',line) for line in xdata[12:]], dtype='float32')
+    if len(xdata) > 12:
+        polar_nums = np.array([re.findall(r'[-+]?\d+[\.\,\d]*\d*',line) for line in xdata[12:]], dtype='float32')
+    else:
+        print('Could not load data for airfoil '+ a_name)
+        continue
 
     # The input vector to the ANN
     # input = 
@@ -75,6 +79,7 @@ test = 0.2
 
 # Each element of the input data consists of: [x1,y1,x2,y2,...,Re,Ma,AoA]
 # Each element of the output data consists of: [CL,CD,CM]]
+print(len(airfoil_outputs))
 print('Almost done')
 np.savez('aero_shape_opt\\datasets\\data_file',input=airfoil_inputs,output=airfoil_outputs)
 print('Done')
