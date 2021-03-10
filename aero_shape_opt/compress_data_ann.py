@@ -1,9 +1,11 @@
 # Compress airfoil data into a single .npz folder for easier extraction later
 
 import os
+import math
 import numpy as np
 import re
 import warnings
+import random
 
 airfoil_names = []
 in_dir = "aero_shape_opt\\datasets\\airfoils"
@@ -73,24 +75,28 @@ for a_name in airfoil_names:
         airfoil_outputs.append(output)
 
 
-# Ratio of test data 
-test = 0.2
-# SHOULD WE SPLIT DATA HERE, OR WHEN WE IMPORT IT FOR ANN???
+# Ratio of train data 
+train = 0.8
 
 # Each element of the input data consists of: [x1,y1,x2,y2,...,Re,Ma,AoA]
 # Each element of the output data consists of: [CL,CD,CM]]
 print(len(airfoil_outputs))
 print('Almost done')
-np.savez('aero_shape_opt\\datasets\\data_file',input=airfoil_inputs,output=airfoil_outputs)
-print('Done')
+order = [i for i in range(len(airfoil_inputs))]
+random.shuffle(order)
+inp_train = [airfoil_inputs[i] for i in order[:math.ceil(train*len(airfoil_inputs))]]
+inp_test =  [airfoil_inputs[i] for i in order[math.ceil(train*len(airfoil_inputs)):]]
+out_train = [airfoil_outputs[i] for i in order[:math.ceil(train*len(airfoil_outputs))]]
+out_test =  [airfoil_outputs[i] for i in order[math.ceil(train*len(airfoil_outputs)):]]
+
+np.savez('aero_shape_opt\\datasets\\data_file_ann',x_train=inp_train,x_test=inp_test,y_train=out_train,y_test=out_test)
 
 # TO IMPORT THE NEWLY CREATED FILE:
-data = np.load('aero_shape_opt\\datasets\\data_file.npz',allow_pickle=True)
-inp = data['input']
-out = data['output']
+data = np.load('aero_shape_opt\\datasets\\data_file_ann.npz',allow_pickle=True)
+x_train = data['x_train']
+x_test = data['x_test']
+y_train = data['y_train']
+y_test = data['y_test']
 
-
-
-
-
+print('Done')
 

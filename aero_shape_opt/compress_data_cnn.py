@@ -1,10 +1,12 @@
 # Compress airfoil data into a single .npz folder for easier extraction later
 
 import os
+import math 
 import numpy as np
 import re
 import warnings
 import shutil
+import random
 from cnn_2D.airfoil import Airfoil
 
 
@@ -54,6 +56,8 @@ for a_name in airfoil_names:
         px = af.pixel_grid()
     except:
         shutil.move('{}\\{}.dat'.format(in_dir,a_name),'aero_shape_opt\\datasets\\bad_airfoils')
+        shutil.move('{}\\{}_airfoil.txt'.format(out_dir,a_name),'aero_shape_opt\\datasets\\bad_airfoils')
+        shutil.move('{}\\{}_polar.txt'.format(out_dir,a_name),'aero_shape_opt\\datasets\\bad_airfoils')
         continue
 
     #coords = coords.flatten() # flatten to a vector of [x1,y1,x2,y2,...]
@@ -86,21 +90,30 @@ for a_name in airfoil_names:
         airfoil_outputs.append(output)
 
 
-# Ratio of test data 
-test = 0.2
-# SHOULD WE SPLIT DATA HERE, OR WHEN WE IMPORT IT FOR ANN???
+# Ratio of train data 
+train = 0.8
 
-# Each element of the input data consists of: [x1,y1,x2,y2,...,Re,Ma,AoA]
+# Each element of the input data consists of: [[pixel image],Re,Ma,AoA]
 # Each element of the output data consists of: [CL,CD,CM]]
 print(len(airfoil_outputs))
 print('Almost done')
-np.savez('aero_shape_opt\\datasets\\data_file',input=airfoil_inputs,output=airfoil_outputs)
-print('Done')
+order = [i for i in range(len(airfoil_inputs))]
+random.shuffle(order)
+inp_train = [airfoil_inputs[i] for i in order[:math.ceil(train*len(airfoil_inputs))]]
+inp_test =  [airfoil_inputs[i] for i in order[math.ceil(train*len(airfoil_inputs)):]]
+out_train = [airfoil_outputs[i] for i in order[:math.ceil(train*len(airfoil_outputs))]]
+out_test =  [airfoil_outputs[i] for i in order[math.ceil(train*len(airfoil_outputs)):]]
+
+np.savez('aero_shape_opt\\datasets\\data_file_cnn',x_train=inp_train,x_test=inp_test,y_train=out_train,y_test=out_test)
 
 # TO IMPORT THE NEWLY CREATED FILE:
-data = np.load('aero_shape_opt\\datasets\\data_file.npz',allow_pickle=True)
-inp = data['input']
-out = data['output']
+data = np.load('aero_shape_opt\\datasets\\data_file_cnn.npz',allow_pickle=True)
+x_train = data['x_train']
+x_test = data['x_test']
+y_train = data['y_train']
+y_test = data['y_test']
+
+print('Done')
 
 
 
