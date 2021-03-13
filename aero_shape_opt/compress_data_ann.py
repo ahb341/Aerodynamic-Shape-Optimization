@@ -32,6 +32,10 @@ for a_name in airfoil_names:
             coords = np.loadtxt(out_dir + "\\" + coord_name)
         coords = coords.flatten() # flatten to a vector of [x1,y1,x2,y2,...]
 
+        if(len(coords) > 340):
+            print('Too many coordinate points for airfoil '+ a_name)
+            continue
+
         # Extract all polar data
         f = open(out_dir + "\\" + polar_name, 'r')
         xdata = f.read()
@@ -76,7 +80,7 @@ for a_name in airfoil_names:
 
 
 # Ratio of train data 
-train = 0.8
+train = 0.7
 
 # Each element of the input data consists of: [x1,y1,x2,y2,...,Re,Ma,AoA]
 # Each element of the output data consists of: [CL,CD,CM]]
