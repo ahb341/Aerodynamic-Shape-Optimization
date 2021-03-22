@@ -28,8 +28,6 @@ def generate_ANN(input, output):
       # tf.keras.layers.Dense(100),
       # tf.keras.layers.Dense(60),
 
-      # tf.keras.layers.Dense(420, activation='relu'),
-      # tf.keras.layers.Dropout(0.15),
       tf.keras.layers.Dense(350, activation='relu'),
       tf.keras.layers.Dropout(0.20),
       tf.keras.layers.Dense(300, activation='relu'),
