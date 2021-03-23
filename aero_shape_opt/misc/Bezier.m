@@ -19,6 +19,6 @@ for t=linspace(0,1,num_coords)
     L=cat(1,L,UB);%catenation 
 end
 Pts=L*p;
-line(Pts(:,1),Pts(:,2),'Color','red')
-line(p(:,1),p(:,2))
+%line(Pts(:,1),Pts(:,2),'Color','red')
+%line(p(:,1),p(:,2))
 end
