@@ -1,0 +1,20 @@
+PLOP
+g
+
+load aero_shape_opt/misc/airfoil_gen/NN10044.dat
+PPAR
+N 170
+
+
+PSAV aero_shape_opt/datasets/xfoil_data_spline/NN10044_airfoil.txt
+OPER
+VISC 500000 
+MACH 0 
+ITER 200
+PACC
+aero_shape_opt/datasets/xfoil_data_spline/NN10044_polar.txt
+
+ASEQ -2 6 0.25
+PACC
+
+QUIT
