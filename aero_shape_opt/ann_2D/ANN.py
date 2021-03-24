@@ -16,34 +16,9 @@ def generate_ANN(input, output):
    model = tf.keras.Sequential(
    [
       tf.keras.layers.Input(shape=(len(input),)),
-      # tf.keras.layers.Dense(200, activation='relu'),
-      # tf.keras.layers.Dropout(0.25),
-      # tf.keras.layers.Dense(100, activation='relu'),
-      # tf.keras.layers.Dropout(0.25),
-      # tf.keras.layers.Dense(60, activation='relu'),
-      # tf.keras.layers.Dropout(0.25),
-
-      # tf.keras.layers.Dense(100, activation='relu'),
-      # tf.keras.layers.Dropout(0.25),
-      # tf.keras.layers.Dense(100),
-      # tf.keras.layers.Dense(60),
-
-      tf.keras.layers.Dense(350, activation='relu'),
-      tf.keras.layers.Dropout(0.20),
-      tf.keras.layers.Dense(300, activation='relu'),
-      tf.keras.layers.Dropout(0.20),
-      tf.keras.layers.Dense(270, activation='relu'),
-      tf.keras.layers.Dropout(0.20),
-      tf.keras.layers.Dense(220, activation='relu'),
-      tf.keras.layers.Dropout(0.20),
-      tf.keras.layers.Dense(160, activation='relu'),
-      tf.keras.layers.Dropout(0.20),
-      tf.keras.layers.Dense(120, activation='relu'),
-      tf.keras.layers.Dropout(0.20),
-      tf.keras.layers.Dense(60, activation='relu'),
-      tf.keras.layers.Dropout(0.20),
-      tf.keras.layers.Dense(10, activation='relu'),
-      tf.keras.layers.Dropout(0.20),
+      tf.keras.layers.Dense(20, activation='relu'),
+      tf.keras.layers.Dense(3, activation='relu'),
+      #tf.keras.layers.Dropout(0.20),
       # tf.keras.layers.Dense(25, activation='relu'),
       # tf.keras.layers.Dropout(0.15),
       # tf.keras.layers.Dense(20, activation='relu'),
@@ -52,7 +27,7 @@ def generate_ANN(input, output):
       tf.keras.layers.Dense(len(output), activation='softmax')
    ])
 
-   model.compile(optimizer=keras.optimizers.Adam(lr=1e-4),#'adam',
+   model.compile(optimizer=keras.optimizers.Adam(lr=0.001),
                loss='categorical_crossentropy',
                metrics=['accuracy'])
 
@@ -71,6 +46,7 @@ x_train = data['x_train']
 x_test = data['x_test']
 y_train = data['y_train']
 y_test = data['y_test']
+
 
 model = generate_ANN(x_train[0],y_train[0])
 

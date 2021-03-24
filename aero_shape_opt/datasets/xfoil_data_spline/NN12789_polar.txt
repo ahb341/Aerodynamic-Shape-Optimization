@@ -1,0 +1,15 @@
+  
+       XFOIL         Version 6.99
+  
+ Calculated polar for: NN12789                                         
+  
+ 1 1 Reynolds number fixed          Mach number fixed         
+  
+ xtrf =   1.000 (top)        1.000 (bottom)  
+ Mach =   0.000     Re =     0.500 e 6     Ncrit =   9.000
+  
+   alpha    CL        CD       CDp       CM     Top_Xtr  Bot_Xtr
+  ------ -------- --------- --------- -------- -------- --------
+  -1.250  -0.2257   0.03271   0.02535  -0.0835   0.6217   0.2014
+  -1.000  -0.1811   0.03175   0.02438  -0.0868   0.6222   0.2103
+  -0.750  -0.1337   0.03068   0.02332  -0.0906   0.6227   0.2202
