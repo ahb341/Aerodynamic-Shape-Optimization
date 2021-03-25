@@ -22,8 +22,8 @@ downy(5) = gen(5) - gen(8);
 upper = []; lower = [];
 n = length(upx);
 for i = 1:n
-    upper(i,:) = [upx(n-i+1) upy(n-i+1)];
-    lower(i,:) = [downx(i) downy(i)];
+    upper(i,:) = [upx(n-i+1) upy(n-i+1)]; %#ok<AGROW>
+    lower(i,:) = [downx(i) downy(i)]; %#ok<AGROW>
 end
 cp = [upper; lower];
 af = [Bezier(upper, num_coords); Bezier(lower, num_coords)];
