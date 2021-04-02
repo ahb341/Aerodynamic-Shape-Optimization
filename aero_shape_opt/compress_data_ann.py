@@ -82,12 +82,14 @@ for a_name in airfoil_names:
 
         # [x1,y1,x2,y2,...,Re,Ma,AoA]
         #input = np.append(coords,(Re,Ma,aoa))
-        for i,c in zip(range(len(coords)),coords):
-	        if i % 2 != 0:
-		        coords[i] = (coords[i]+0.1)/0.5
-        input = np.append(coords,(aoa+2)/8)
+        # for i,c in zip(range(len(coords)),coords):
+	    #     if i % 2 != 0:
+		#         coords[i] = (coords[i]+0.1)/0.5
+        #input = np.append(coords,(aoa+2)/8)
+        input = np.append(coords,aoa)
         #output = [CL,CD,CM]
-        output = [(CL+.5)/2.5]
+        #output = [(CL+.5)/2.5]
+        output = CL
 
         airfoil_inputs.append(input.tolist())
         airfoil_outputs.append(output)
