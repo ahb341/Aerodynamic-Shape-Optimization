@@ -61,6 +61,7 @@ def generate_ANN(input, output):
 
    return model
 
+#model = keras.models.load_model('model/')
 model = generate_ANN(x_train[0],y_train[0])
 
 # data_np = np.asarray(data, np.float32)
@@ -90,5 +91,7 @@ plot_metric(history,'loss')
 #model.evaluate(x_test, y_test, batch_size=32, verbose=2)
 
 print(model.summary())
+
+model.save('model/')
 
 print('Done')
